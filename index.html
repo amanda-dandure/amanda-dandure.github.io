@@ -4,179 +4,332 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amandah Dandure — Software Developer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            indigo: { 500: '#6366f1', 600: '#4F46E5', 700: '#4338ca' },
-            surface: '#12121f',
-            card: '#1c1c2e',
-            border: '#2a2a3f',
-          },
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-        }
-      }
-    }
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    html { scroll-behavior: smooth; }
-    body { background-color: #0d0d1a; color: #e2e8f0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #6366f1, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    :root {
+      --blue:      #1a56db;
+      --blue-light:#2563eb;
+      --blue-dim:  #1e3a6e;
+      --bg:        #06090f;
+      --bg-2:      #0b1120;
+      --card:      #0f1829;
+      --border:    #1a2540;
+      --text:      #f1f5f9;
+      --muted:     #64748b;
+      --subtle:    #94a3b8;
     }
 
-    .card {
-      background: #1c1c2e;
-      border: 1px solid #2a2a3f;
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6, 9, 15, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 2rem; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-weight: 600; font-size: 0.95rem; color: var(--text); letter-spacing: -0.01em; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-size: 0.875rem; color: var(--muted);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .btn-hire {
+      font-size: 0.85rem; font-weight: 500;
+      background: var(--blue); color: #fff;
+      padding: 0.45rem 1.1rem; border-radius: 6px;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .btn-hire:hover { background: var(--blue-light); }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 2rem; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 1rem;
+    }
+    .section-tag::before {
+      content: ''; display: block;
+      width: 20px; height: 1px; background: var(--blue-light);
+    }
+
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 60px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--card); border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem; border-radius: 999px;
+      font-size: 0.78rem; color: var(--subtle);
+      margin-bottom: 2rem;
+    }
+    .hero-badge span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700; color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .hero-name .blue { color: var(--blue-light); }
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 400; color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-stack {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .stack-chip {
+      font-size: 0.8rem; padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px; color: var(--subtle);
+    }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      padding: 0.7rem 1.5rem; border-radius: 6px;
+      font-weight: 500; font-size: 0.9rem;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--blue-light); }
+    .btn-secondary {
+      background: transparent; color: var(--subtle);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.5rem; border-radius: 6px;
+      font-weight: 500; font-size: 0.9rem;
+      text-decoration: none; transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--text); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg-2); border-bottom: 1px solid var(--border); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .about-text h2 { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 1.25rem; }
+    .about-text p { color: var(--subtle); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.75; }
+    .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .about-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .about-card:hover { border-color: var(--blue-dim); }
+    .about-card-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+    .about-card-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+    .about-card-sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .projects-header { margin-bottom: 3rem; }
+    .projects-header h2 { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .projects-header p { color: var(--muted); font-size: 0.95rem; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.75rem;
+      display: flex; flex-direction: column;
       transition: border-color 0.2s, transform 0.2s;
     }
-    .card:hover { border-color: #4F46E5; transform: translateY(-2px); }
-
+    .project-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .project-card-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .project-num { font-size: 0.75rem; font-weight: 600; color: var(--blue-light); letter-spacing: 0.05em; }
+    .project-gh-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.8rem; color: var(--muted);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .project-gh-link:hover { color: var(--blue-light); }
+    .project-card h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.6rem; }
+    .project-card p { font-size: 0.875rem; color: var(--subtle); line-height: 1.65; flex: 1; margin-bottom: 1.25rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag {
-      background: #1e1e35;
-      border: 1px solid #2a2a3f;
-      color: #a78bfa;
-      font-size: 0.72rem;
-      padding: 2px 10px;
-      border-radius: 999px;
+      font-size: 0.72rem; padding: 0.2rem 0.65rem;
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 4px; color: var(--muted);
     }
 
-    nav { background: rgba(13, 13, 26, 0.85); backdrop-filter: blur(12px); }
+    /* ── SKILLS ── */
+    #skills { background: var(--bg-2); border-bottom: 1px solid var(--border); }
+    #skills h2 { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 3rem; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.5rem;
+    }
+    .skill-card-label {
+      font-size: 0.72rem; font-weight: 600; color: var(--blue-light);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.85rem;
+    }
+    .skill-card .tags { gap: 0.4rem; }
 
-    .hero-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%);
-      top: -100px; left: 50%; transform: translateX(-50%);
-      pointer-events: none;
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+    .contact-inner { max-width: 600px; }
+    #contact h2 { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; }
+    #contact p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.8rem; color: var(--muted);
     }
 
-    .section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #6366f1;
-      font-weight: 600;
+    /* ── DIVIDER ── */
+    .divider { width: 40px; height: 3px; background: var(--blue); border-radius: 2px; margin: 1rem 0 1.5rem; }
+
+    /* ── FADE IN ── */
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.25rem; }
     }
-
-    .skill-group h4 { font-size: 0.78rem; color: #94a3b8; font-weight: 500; margin-bottom: 8px; letter-spacing: 0.05em; text-transform: uppercase; }
-
-    a.nav-link { transition: color 0.15s; }
-    a.nav-link:hover { color: #a78bfa; }
-
-    .project-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      color: #6366f1; font-size: 0.85rem; font-weight: 500;
-      transition: color 0.15s;
-    }
-    .project-link:hover { color: #a78bfa; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { animation: fadeUp 0.5s ease both; }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
   </style>
 </head>
-<body class="font-sans antialiased">
+<body>
 
   <!-- NAV -->
-  <nav class="fixed top-0 inset-x-0 z-50 border-b border-[#2a2a3f]">
-    <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-      <span class="font-semibold text-white tracking-tight">Amandah Dandure</span>
-      <div class="hidden sm:flex items-center gap-6 text-sm text-slate-400">
-        <a href="#about"    class="nav-link">About</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#skills"   class="nav-link">Skills</a>
-        <a href="#contact"  class="nav-link">Contact</a>
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-logo">Amandah Dandure</span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
       </div>
-      <a href="mailto:amandadandure2@gmail.com"
-         class="text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full font-medium transition-colors">
-        Hire me
-      </a>
+      <a href="mailto:amandadandure2@gmail.com" class="btn-hire">Hire me</a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="relative pt-36 pb-24 px-6 text-center overflow-hidden">
-    <div class="hero-glow"></div>
-    <div class="relative max-w-3xl mx-auto">
-      <div class="fade-up inline-flex items-center gap-2 bg-[#1c1c2e] border border-[#2a2a3f] rounded-full px-4 py-1 text-xs text-slate-400 mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        Open to new opportunities
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-badge fade">
+        <span></span> Open to new opportunities
       </div>
-      <h1 class="fade-up delay-1 text-5xl sm:text-6xl font-bold text-white leading-tight tracking-tight mb-4">
-        Hi, I'm <span class="gradient-text">Amandah</span>
-      </h1>
-      <p class="fade-up delay-2 text-xl text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">
-        Software Developer building production systems with
-        <span class="text-slate-300">Python · Django · Odoo 18 · Flutter · AI APIs</span>
-      </p>
-      <div class="fade-up delay-3 flex flex-wrap justify-center gap-3">
-        <a href="#projects"
-           class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors">
-          View my work
-        </a>
-        <a href="https://github.com/amanda-dandure" target="_blank"
-           class="bg-[#1c1c2e] border border-[#2a2a3f] hover:border-indigo-500 text-slate-300 px-6 py-2.5 rounded-full font-medium transition-colors">
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank"
-           class="bg-[#1c1c2e] border border-[#2a2a3f] hover:border-indigo-500 text-slate-300 px-6 py-2.5 rounded-full font-medium transition-colors">
-          LinkedIn
-        </a>
+      <h1 class="hero-name fade">Hi, I'm<br><span class="blue">Amandah.</span></h1>
+      <p class="hero-title fade">Software Developer · Midrand, South Africa</p>
+      <div class="hero-stack fade">
+        <span class="stack-chip">Python</span>
+        <span class="stack-chip">Django</span>
+        <span class="stack-chip">Odoo 18</span>
+        <span class="stack-chip">Flutter</span>
+        <span class="stack-chip">FastAPI</span>
+        <span class="stack-chip">Claude API</span>
+        <span class="stack-chip">PostgreSQL</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+      <div class="hero-ctas fade">
+        <a href="#projects" class="btn-primary">View my projects</a>
+        <a href="https://github.com/amanda-dandure" target="_blank" class="btn-secondary">GitHub</a>
+        <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank" class="btn-secondary">LinkedIn</a>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="py-20 px-6">
-    <div class="max-w-5xl mx-auto">
-      <p class="section-label mb-3">About</p>
-      <div class="grid md:grid-cols-2 gap-12 items-start">
-        <div>
-          <h2 class="text-3xl font-bold text-white mb-4">Building real systems, not just demos</h2>
-          <p class="text-slate-400 leading-relaxed mb-4">
-            Software Developer based in Midrand, South Africa, with a BSc in IT and 1+ year of production
-            experience at ManTech Systems &amp; Solutions. I build things that run in real warehouses, on factory
-            floors, and in enterprise back-offices.
+  <section id="about">
+    <div class="inner">
+      <p class="section-tag">About</p>
+      <div class="about-grid">
+        <div class="about-text fade">
+          <h2>Building real systems,<br>not just demos.</h2>
+          <div class="divider"></div>
+          <p>
+            Software Developer with a BSc in IT and 1+ year of production experience at
+            ManTech Systems &amp; Solutions. I build things that run in real warehouses,
+            on factory floors, and in enterprise back-offices.
           </p>
-          <p class="text-slate-400 leading-relaxed mb-4">
-            My stack spans Odoo 18 ERP customisation, Python/Django REST APIs, Flutter offline-first mobile apps,
-            and AI-integrated tools using the Claude and OpenAI APIs. I've shipped cryptographic document-signing
+          <p>
+            My stack spans Odoo 18 ERP customisation, Python/Django REST APIs,
+            Flutter offline-first mobile apps, and AI-integrated tools using the
+            Claude and OpenAI APIs. I've shipped cryptographic document-signing
             systems, MES platforms, and RAG-powered search tools — all in production.
           </p>
-          <p class="text-slate-400 leading-relaxed">
-            The five projects below are open-source replicas of that work — fully functional, publicly accessible,
-            and built to the same standard.
+          <p>
+            The five projects below are open-source replicas of that work — fully
+            functional, publicly accessible, and built to the same standard.
           </p>
         </div>
-        <div class="space-y-4">
-          <div class="card rounded-xl p-5">
-            <p class="text-xs text-slate-500 mb-1">Current role</p>
-            <p class="text-white font-medium">Software Developer</p>
-            <p class="text-slate-400 text-sm">ManTech Systems &amp; Solutions · Jan 2025 – Present</p>
+        <div class="about-cards fade">
+          <div class="about-card">
+            <p class="about-card-label">Current role</p>
+            <p class="about-card-title">Software Developer</p>
+            <p class="about-card-sub">ManTech Systems &amp; Solutions · Jan 2025 – Present</p>
           </div>
-          <div class="card rounded-xl p-5">
-            <p class="text-xs text-slate-500 mb-1">Education</p>
-            <p class="text-white font-medium">BSc Information Technology — Systems Development</p>
-            <p class="text-slate-400 text-sm">Richfield Graduate Institute of Technology · 2021</p>
+          <div class="about-card">
+            <p class="about-card-label">Education</p>
+            <p class="about-card-title">BSc Information Technology — Systems Development</p>
+            <p class="about-card-sub">Richfield Graduate Institute of Technology · 2021</p>
           </div>
-          <div class="card rounded-xl p-5">
-            <p class="text-xs text-slate-500 mb-1">Location</p>
-            <p class="text-white font-medium">Midrand, Gauteng, South Africa</p>
-            <p class="text-slate-400 text-sm">On-site · Hybrid · Remote</p>
+          <div class="about-card">
+            <p class="about-card-label">Also</p>
+            <p class="about-card-title">ALX Software Engineering Programme</p>
+            <p class="about-card-sub">Front-end Specialisation · 2023</p>
+          </div>
+          <div class="about-card">
+            <p class="about-card-label">Location</p>
+            <p class="about-card-title">Midrand, Gauteng, South Africa</p>
+            <p class="about-card-sub">On-site · Hybrid · Remote</p>
           </div>
         </div>
       </div>
@@ -184,148 +337,93 @@
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="py-20 px-6 bg-[#0a0a15]">
-    <div class="max-w-5xl mx-auto">
-      <p class="section-label mb-3">Open-Source Portfolio</p>
-      <h2 class="text-3xl font-bold text-white mb-2">Five projects. All shipped.</h2>
-      <p class="text-slate-400 mb-10">Each one is a public, working codebase — not a tutorial clone.</p>
+  <section id="projects">
+    <div class="inner">
+      <p class="section-tag">Open-Source Portfolio</p>
+      <div class="projects-header fade">
+        <h2>Five projects. All shipped.</h2>
+        <p>Public, working codebases — not tutorial clones.</p>
+      </div>
+      <div class="projects-grid">
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-        <!-- jobboard-api -->
-        <div class="card rounded-xl p-6 flex flex-col">
-          <div class="flex items-start justify-between mb-3">
-            <span class="text-2xl">🗂️</span>
-            <a href="https://github.com/amanda-dandure/jobboard-api" target="_blank" class="project-link">
+        <div class="project-card fade">
+          <div class="project-card-top">
+            <span class="project-num">01</span>
+            <a href="https://github.com/amanda-dandure/jobboard-api" target="_blank" class="project-gh-link">
               GitHub
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
-                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
-              </svg>
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
             </a>
           </div>
-          <h3 class="text-white font-semibold mb-2">jobboard-api</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-            RESTful job board API with JWT role-based auth for employers and job seekers,
-            Celery async email tasks, full pytest suite, and Docker Compose setup.
-          </p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="tag">Django 5</span>
-            <span class="tag">DRF</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Celery</span>
-            <span class="tag">Docker</span>
+          <h3>jobboard-api</h3>
+          <p>RESTful job board API with JWT role-based auth for employers and job seekers, Celery async email tasks, full pytest suite with factory-boy, and Docker Compose setup.</p>
+          <div class="tags">
+            <span class="tag">Django 5</span><span class="tag">DRF</span><span class="tag">PostgreSQL</span><span class="tag">Celery</span><span class="tag">Docker</span>
           </div>
         </div>
 
-        <!-- jobflow-ai -->
-        <div class="card rounded-xl p-6 flex flex-col">
-          <div class="flex items-start justify-between mb-3">
-            <span class="text-2xl">🤖</span>
-            <a href="https://github.com/amanda-dandure/jobflow-ai" target="_blank" class="project-link">
+        <div class="project-card fade">
+          <div class="project-card-top">
+            <span class="project-num">02</span>
+            <a href="https://github.com/amanda-dandure/jobflow-ai" target="_blank" class="project-gh-link">
               GitHub
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
-                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
-              </svg>
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
             </a>
           </div>
-          <h3 class="text-white font-semibold mb-2">jobflow-ai</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-            AI-powered job application tracker with Kanban board and one-click cover letter
-            generation via Claude API with prompt caching to cut latency and cost.
-          </p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="tag">Django</span>
-            <span class="tag">Claude API</span>
-            <span class="tag">HTMX</span>
-            <span class="tag">Tailwind</span>
-            <span class="tag">Alpine.js</span>
+          <h3>jobflow-ai</h3>
+          <p>AI-powered job application tracker with Kanban board and one-click cover letter generation via Claude API with prompt caching to cut latency and cost.</p>
+          <div class="tags">
+            <span class="tag">Django</span><span class="tag">Claude API</span><span class="tag">HTMX</span><span class="tag">Tailwind</span><span class="tag">Alpine.js</span>
           </div>
         </div>
 
-        <!-- odoo-helpdesk-lite -->
-        <div class="card rounded-xl p-6 flex flex-col">
-          <div class="flex items-start justify-between mb-3">
-            <span class="text-2xl">🎫</span>
-            <a href="https://github.com/amanda-dandure/odoo-helpdesk-lite" target="_blank" class="project-link">
+        <div class="project-card fade">
+          <div class="project-card-top">
+            <span class="project-num">03</span>
+            <a href="https://github.com/amanda-dandure/odoo-helpdesk-lite" target="_blank" class="project-gh-link">
               GitHub
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
-                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
-              </svg>
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
             </a>
           </div>
-          <h3 class="text-white font-semibold mb-2">odoo-helpdesk-lite</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-            Installable Odoo 18 helpdesk module with Kanban stage workflow, SLA-based overdue
-            tracking, ticket close wizard, chatter integration, and sequence-numbered tickets.
-          </p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="tag">Odoo 18</span>
-            <span class="tag">Python</span>
-            <span class="tag">XML</span>
-            <span class="tag">PostgreSQL</span>
+          <h3>odoo-helpdesk-lite</h3>
+          <p>Installable Odoo 18 helpdesk module with Kanban stage workflow, SLA-based overdue tracking, ticket close wizard, chatter integration, and sequence-numbered tickets.</p>
+          <div class="tags">
+            <span class="tag">Odoo 18</span><span class="tag">Python</span><span class="tag">XML</span><span class="tag">PostgreSQL</span>
           </div>
         </div>
 
-        <!-- doc-qa -->
-        <div class="card rounded-xl p-6 flex flex-col">
-          <div class="flex items-start justify-between mb-3">
-            <span class="text-2xl">📄</span>
-            <a href="https://github.com/amanda-dandure/doc-qa" target="_blank" class="project-link">
+        <div class="project-card fade">
+          <div class="project-card-top">
+            <span class="project-num">04</span>
+            <a href="https://github.com/amanda-dandure/doc-qa" target="_blank" class="project-gh-link">
               GitHub
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
-                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
-              </svg>
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
             </a>
           </div>
-          <h3 class="text-white font-semibold mb-2">doc-qa</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-            Semantic document Q&amp;A using RAG — upload PDF/TXT, chunk and embed with
-            sentence-transformers and ChromaDB, answer via Claude API with source citations.
-          </p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="tag">FastAPI</span>
-            <span class="tag">ChromaDB</span>
-            <span class="tag">Claude API</span>
-            <span class="tag">RAG</span>
+          <h3>doc-qa</h3>
+          <p>Semantic document Q&amp;A using RAG — upload PDF/TXT, chunk and embed with sentence-transformers and ChromaDB, answer via Claude API with source citations.</p>
+          <div class="tags">
+            <span class="tag">FastAPI</span><span class="tag">ChromaDB</span><span class="tag">Claude API</span><span class="tag">RAG</span>
           </div>
         </div>
 
-        <!-- warehouse-scanner -->
-        <div class="card rounded-xl p-6 flex flex-col">
-          <div class="flex items-start justify-between mb-3">
-            <span class="text-2xl">📦</span>
-            <a href="https://github.com/amanda-dandure/warehouse-scanner" target="_blank" class="project-link">
+        <div class="project-card fade">
+          <div class="project-card-top">
+            <span class="project-num">05</span>
+            <a href="https://github.com/amanda-dandure/warehouse-scanner" target="_blank" class="project-gh-link">
               GitHub
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
-                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
-              </svg>
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
             </a>
           </div>
-          <h3 class="text-white font-semibold mb-2">warehouse-scanner</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-            Offline-first Android/iOS warehouse app with live barcode scanning, local SQLite
-            storage, and automatic batch sync to a REST API when back online.
-          </p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="tag">Flutter</span>
-            <span class="tag">SQLite</span>
-            <span class="tag">Dart</span>
-            <span class="tag">Dio</span>
+          <h3>warehouse-scanner</h3>
+          <p>Offline-first Android/iOS warehouse app with live barcode scanning, local SQLite storage, and automatic batch sync to a REST API when connectivity is restored.</p>
+          <div class="tags">
+            <span class="tag">Flutter</span><span class="tag">SQLite</span><span class="tag">Dart</span><span class="tag">Dio</span>
           </div>
         </div>
 
-        <!-- CTA card -->
-        <div class="rounded-xl p-6 flex flex-col items-center justify-center text-center border border-dashed border-[#2a2a3f] hover:border-indigo-500 transition-colors">
-          <p class="text-slate-500 text-sm mb-3">See all repositories</p>
-          <a href="https://github.com/amanda-dandure" target="_blank"
-             class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm px-5 py-2 rounded-full font-medium transition-colors">
-            View GitHub →
-          </a>
+        <div class="project-card fade" style="align-items:center;justify-content:center;text-align:center;border-style:dashed;">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">See all repositories</p>
+          <a href="https://github.com/amanda-dandure" target="_blank" class="btn-primary" style="font-size:0.85rem;padding:0.55rem 1.25rem;">View GitHub →</a>
         </div>
 
       </div>
@@ -333,109 +431,65 @@
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="py-20 px-6">
-    <div class="max-w-5xl mx-auto">
-      <p class="section-label mb-3">Skills</p>
-      <h2 class="text-3xl font-bold text-white mb-10">Tech stack</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <div class="skill-group card rounded-xl p-5">
-          <h4>Languages</h4>
-          <div class="flex flex-wrap gap-2">
-            <span class="tag">Python</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Dart</span>
-            <span class="tag">C</span>
-          </div>
+  <section id="skills">
+    <div class="inner">
+      <p class="section-tag">Skills</p>
+      <h2 class="fade">Tech stack</h2>
+      <div class="divider"></div>
+      <div class="skills-grid">
+        <div class="skill-card fade">
+          <p class="skill-card-label">Languages</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">Dart</span><span class="tag">C</span></div>
         </div>
-
-        <div class="skill-group card rounded-xl p-5">
-          <h4>Frameworks</h4>
-          <div class="flex flex-wrap gap-2">
-            <span class="tag">Django 4/5</span>
-            <span class="tag">DRF</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Flutter</span>
-            <span class="tag">Odoo 18</span>
-            <span class="tag">Flask</span>
-          </div>
+        <div class="skill-card fade">
+          <p class="skill-card-label">Frameworks</p>
+          <div class="tags"><span class="tag">Django 4/5</span><span class="tag">DRF</span><span class="tag">FastAPI</span><span class="tag">Flutter</span><span class="tag">Odoo 18</span><span class="tag">Flask</span></div>
         </div>
-
-        <div class="skill-group card rounded-xl p-5">
-          <h4>AI &amp; ML</h4>
-          <div class="flex flex-wrap gap-2">
-            <span class="tag">Claude API</span>
-            <span class="tag">OpenAI API</span>
-            <span class="tag">RAG</span>
-            <span class="tag">ChromaDB</span>
-            <span class="tag">Prompt engineering</span>
-          </div>
+        <div class="skill-card fade">
+          <p class="skill-card-label">AI &amp; ML</p>
+          <div class="tags"><span class="tag">Claude API</span><span class="tag">OpenAI API</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">Prompt engineering</span></div>
         </div>
-
-        <div class="skill-group card rounded-xl p-5">
-          <h4>Databases</h4>
-          <div class="flex flex-wrap gap-2">
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">SQLite</span>
-            <span class="tag">Redis</span>
-          </div>
+        <div class="skill-card fade">
+          <p class="skill-card-label">Databases</p>
+          <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">SQLite</span><span class="tag">Redis</span></div>
         </div>
-
-        <div class="skill-group card rounded-xl p-5">
-          <h4>DevOps &amp; Tools</h4>
-          <div class="flex flex-wrap gap-2">
-            <span class="tag">Docker</span>
-            <span class="tag">Celery</span>
-            <span class="tag">Nginx</span>
-            <span class="tag">Git</span>
-            <span class="tag">Linux</span>
-            <span class="tag">Jira</span>
-          </div>
+        <div class="skill-card fade">
+          <p class="skill-card-label">DevOps &amp; Tools</p>
+          <div class="tags"><span class="tag">Docker</span><span class="tag">Celery</span><span class="tag">Nginx</span><span class="tag">Git</span><span class="tag">Linux</span><span class="tag">Jira</span></div>
         </div>
-
-        <div class="skill-group card rounded-xl p-5">
-          <h4>Integrations</h4>
-          <div class="flex flex-wrap gap-2">
-            <span class="tag">SYSPRO ERP</span>
-            <span class="tag">ThingsBoard IoT</span>
-            <span class="tag">Twilio</span>
-            <span class="tag">Pinecone</span>
-          </div>
+        <div class="skill-card fade">
+          <p class="skill-card-label">Integrations</p>
+          <div class="tags"><span class="tag">SYSPRO ERP</span><span class="tag">ThingsBoard IoT</span><span class="tag">Twilio</span><span class="tag">Pinecone</span></div>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-20 px-6 bg-[#0a0a15]">
-    <div class="max-w-5xl mx-auto text-center">
-      <p class="section-label mb-3">Contact</p>
-      <h2 class="text-3xl font-bold text-white mb-4">Let's work together</h2>
-      <p class="text-slate-400 mb-10 max-w-md mx-auto">
-        Open to backend, full-stack, and Odoo development roles — remote, hybrid, or on-site in Gauteng.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="mailto:amandadandure2@gmail.com"
-           class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-medium transition-colors">
-          amandadandure2@gmail.com
-        </a>
-        <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank"
-           class="bg-[#1c1c2e] border border-[#2a2a3f] hover:border-indigo-500 text-slate-300 px-8 py-3 rounded-full font-medium transition-colors">
-          LinkedIn
-        </a>
-        <a href="https://github.com/amanda-dandure" target="_blank"
-           class="bg-[#1c1c2e] border border-[#2a2a3f] hover:border-indigo-500 text-slate-300 px-8 py-3 rounded-full font-medium transition-colors">
-          GitHub
-        </a>
+  <section id="contact">
+    <div class="inner">
+      <p class="section-tag">Contact</p>
+      <div class="contact-inner fade">
+        <h2>Let's work together.</h2>
+        <div class="divider"></div>
+        <p>Open to backend, full-stack, and Odoo development roles — remote, hybrid, or on-site in Gauteng.</p>
+        <div class="contact-links">
+          <a href="mailto:amandadandure2@gmail.com" class="btn-primary">amandadandure2@gmail.com</a>
+          <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank" class="btn-secondary">LinkedIn</a>
+          <a href="https://github.com/amanda-dandure" target="_blank" class="btn-secondary">GitHub</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="border-t border-[#2a2a3f] py-6 px-6 text-center text-slate-600 text-sm">
-    Amandah Dandure · Midrand, South Africa · 2026
-  </footer>
+  <footer>Amandah Dandure · Midrand, South Africa · 2026</footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+  </script>
 
 </body>
 </html>
