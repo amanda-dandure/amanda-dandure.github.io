@@ -34,24 +34,26 @@
     .nav-id .nav-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
     .nav-id .nav-role { font-size: 0.73rem; color: var(--muted); margin-top: 2px; }
     .nav-pill {
-      display: flex; align-items: center; gap: 3px;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--bdr);
-      border-radius: 999px; padding: 4px;
+      display: flex; align-items: center;
+      background: #1e1e1e; border: 1px solid #2e2e2e;
+      border-radius: 999px; padding: 3px;
+      gap: 1px;
     }
     .nav-pill a {
-      font-size: 0.82rem; font-weight: 500; color: var(--muted);
-      padding: 0.32rem 1.1rem; border-radius: 999px;
-      transition: all 0.2s;
+      font-size: 0.82rem; font-weight: 500; color: #666;
+      padding: 0.35rem 1.25rem; border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.01em;
     }
-    .nav-pill a.active, .nav-pill a:hover { background: rgba(255,255,255,0.09); color: var(--text); }
-    .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; }
-    .nav-right a { font-size: 0.82rem; color: var(--muted); transition: color 0.2s; }
+    .nav-pill a.active { background: #2e2e2e; color: var(--text); }
+    .nav-pill a:hover:not(.active) { color: #999; }
+    .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 2.25rem; }
+    .nav-right a {
+      font-size: 0.82rem; color: var(--muted);
+      display: inline-flex; align-items: center; gap: 3px;
+      transition: color 0.2s;
+    }
     .nav-right a:hover { color: var(--text); }
-    .nav-right .hire-btn {
-      background: var(--blue); color: #fff; padding: 0.4rem 1rem;
-      border-radius: 6px; font-weight: 500; transition: opacity 0.2s;
-    }
-    .nav-right .hire-btn:hover { opacity: 0.85; color: #fff; }
 
     /* HERO */
     #hero {
@@ -277,8 +279,7 @@
   </div>
   <div class="nav-right">
     <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/amanda-dandure" target="_blank">GitHub ↗</a>
-    <a href="mailto:amandadandure2@gmail.com" class="hire-btn">Hire me</a>
+    <a href="mailto:amandadandure2@gmail.com">Contact ↗</a>
   </div>
 </nav>
 
