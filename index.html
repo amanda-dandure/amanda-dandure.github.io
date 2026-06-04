@@ -56,9 +56,38 @@
 
     /* HERO */
     #hero {
-      min-height: 100vh; padding: 120px 3rem 5rem;
-      display: flex; flex-direction: column; justify-content: flex-end;
+      min-height: 100vh;
+      padding: 80px 2rem 2rem;
+      display: flex; flex-direction: column;
       border-bottom: 1px solid var(--bdr);
+    }
+    /* browser window frame */
+    .browser-frame {
+      flex: 1; display: flex; flex-direction: column;
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid #333;
+      box-shadow: 0 32px 80px rgba(0,0,0,.5);
+    }
+    .browser-chrome {
+      background: linear-gradient(180deg, #4a4a4a 0%, #2e2e2e 100%);
+      padding: 0.65rem 1rem;
+      display: flex; align-items: center;
+      flex-shrink: 0;
+    }
+    .traffic-lights { display: flex; align-items: center; gap: 7px; }
+    .tl { width: 12px; height: 12px; border-radius: 50%; }
+    .tl.r { background: #ff5f57; }
+    .tl.y { background: #febc2e; }
+    .tl.g { background: #28c840; }
+    .browser-plus {
+      margin-left: auto; width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      color: #888; font-size: 1.1rem; line-height: 1;
+    }
+    .browser-content {
+      flex: 1; background: var(--bg);
+      padding: 3.5rem 3rem 3rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.55rem;
@@ -69,7 +98,7 @@
     @keyframes p { 0%,100%{opacity:1} 50%{opacity:.25} }
     .hero-h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-size: clamp(3.5rem, 8vw, 8rem);
       line-height: 1.0; letter-spacing: -0.025em;
       font-weight: 400; color: var(--text);
       max-width: 16ch; margin-bottom: 3.5rem;
@@ -284,16 +313,28 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-badge"><span class="pulse"></span> Open to opportunities · Midrand, South Africa</div>
-  <h1 class="hero-h1">I build backends,<br><em>AI tools</em> &amp;<br>mobile apps.</h1>
-  <div class="hero-foot">
-    <p class="hero-bio">
-      <strong>Software Developer</strong> at ManTech Systems &amp; Solutions.<br>
-      Building production systems with Python, Django, Odoo 18,<br>Flutter, and AI APIs. Based in Gauteng.
-    </p>
-    <div class="hero-btns">
-      <a href="#work" class="btn-p">View work</a>
-      <a href="#info" class="btn-s">About me</a>
+  <div class="browser-frame">
+    <div class="browser-chrome">
+      <div class="traffic-lights">
+        <span class="tl r"></span>
+        <span class="tl y"></span>
+        <span class="tl g"></span>
+      </div>
+      <div class="browser-plus">+</div>
+    </div>
+    <div class="browser-content">
+      <div class="hero-badge"><span class="pulse"></span> Open to opportunities · Midrand, South Africa</div>
+      <h1 class="hero-h1">I build backends,<br><em>AI tools</em> &amp;<br>mobile apps.</h1>
+      <div class="hero-foot">
+        <p class="hero-bio">
+          <strong>Software Developer</strong> at ManTech Systems &amp; Solutions.<br>
+          Formerly a Coding Facilitator at The Tomorrow Trust.
+        </p>
+        <div class="hero-btns">
+          <a href="#work" class="btn-p">View work</a>
+          <a href="#info" class="btn-s">About me</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
