@@ -5,23 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amandah Dandure — Software Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #0c0c0c;
-      --bg2:     #111111;
-      --border:  #222222;
-      --text:    #f0f0f0;
-      --muted:   #888888;
-      --dim:     #444444;
-      --blue:    #1a56db;
-      --blue-h:  #2563eb;
+      --bg:     #111111;
+      --bg2:    #161616;
+      --border: #252525;
+      --text:   #f2f2f2;
+      --muted:  #777777;
+      --dim:    #444444;
+      --blue:   #1a56db;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg);
@@ -29,482 +27,666 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-
     a { text-decoration: none; color: inherit; }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.5rem 3rem;
-      display: flex; align-items: center; justify-content: space-between;
-      mix-blend-mode: normal;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      background: rgba(17,17,17,0.88);
+      backdrop-filter: blur(20px);
     }
-    .nav-left { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
-    .nav-right { display: flex; align-items: center; gap: 2rem; }
-    .nav-right a {
-      font-size: 0.85rem; color: var(--muted);
-      transition: color 0.2s;
+    .nav-id { display: flex; flex-direction: column; }
+    .nav-name { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+    .nav-role { font-size: 0.75rem; color: var(--muted); margin-top: 1px; }
+    .nav-pill {
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 999px; padding: 4px;
+      gap: 2px;
     }
-    .nav-right a:hover { color: var(--text); }
-    .nav-right .nav-cta {
+    .nav-pill a {
+      font-size: 0.82rem; font-weight: 500; color: var(--muted);
+      padding: 0.35rem 1rem; border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-pill a.active, .nav-pill a:hover {
+      background: rgba(255,255,255,0.1); color: var(--text);
+    }
+    .nav-links {
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: 1.75rem;
+    }
+    .nav-links a { font-size: 0.82rem; color: var(--muted); transition: color 0.2s; display: flex; align-items: center; gap: 3px; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links .hire {
       background: var(--blue); color: #fff;
-      padding: 0.45rem 1rem; border-radius: 4px;
-      font-size: 0.82rem; font-weight: 500;
-      transition: background 0.2s;
+      padding: 0.38rem 0.9rem; border-radius: 5px; font-weight: 500;
+      transition: opacity 0.2s;
     }
-    .nav-right .nav-cta:hover { background: var(--blue-h); color: #fff; }
+    .nav-links .hire:hover { opacity: 0.85; color: #fff; }
 
     /* ── HERO ── */
     #hero {
-      min-height: 100vh;
-      padding: 0 3rem;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding-bottom: 5rem;
+      min-height: 100vh; padding: 0 2.5rem;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding-bottom: 5rem;
       border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
     }
     .hero-label {
-      font-size: 0.8rem; color: var(--muted); letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
+      font-size: 0.75rem; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase;
       display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 1.75rem;
     }
-    .hero-label::before {
-      content: ''; display: inline-block;
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 8px #22c55e;
+    .hero-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 10px #22c55e;
+      animation: glow 2s ease-in-out infinite;
     }
-    .hero-headline {
+    @keyframes glow { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(3.5rem, 9vw, 8rem);
-      line-height: 1.0;
-      font-weight: 400;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      max-width: 16ch;
-      margin-bottom: 3rem;
-    }
-    .hero-headline em {
-      font-style: italic;
-      color: var(--muted);
-    }
-    .hero-meta {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      flex-wrap: wrap; gap: 2rem;
-    }
-    .hero-desc {
-      font-size: 0.95rem; color: var(--muted); line-height: 1.7;
-      max-width: 380px;
-    }
-    .hero-desc strong { color: var(--text); font-weight: 500; }
-    .hero-scroll {
-      font-size: 0.8rem; color: var(--dim);
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .hero-scroll svg { animation: bounce 2s infinite; }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(4px); }
-    }
-
-    /* ── WORK ── */
-    #work { padding: 6rem 3rem; border-bottom: 1px solid var(--border); }
-    .work-header {
-      display: flex; align-items: baseline; justify-content: space-between;
-      margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
-    }
-    .work-header h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-size: clamp(3.2rem, 8.5vw, 8.5rem);
+      line-height: 1.0; letter-spacing: -0.025em;
       font-weight: 400; color: var(--text);
+      max-width: 18ch; margin-bottom: 4rem;
     }
-    .work-header span { font-size: 0.82rem; color: var(--muted); }
-    .work-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
-    .project-row {
-      background: var(--bg);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      padding: 2rem 0;
-      gap: 2rem;
-      border-bottom: 1px solid var(--border);
-      cursor: default;
-      transition: background 0.2s;
-      text-decoration: none; color: inherit;
+    .hero-h1 em { font-style: italic; color: var(--muted); }
+    .hero-foot {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; flex-wrap: wrap; gap: 2rem;
     }
-    .project-row:hover { background: var(--bg2); }
-    .project-row:hover .project-arrow { transform: translate(4px, -4px); color: var(--text); }
-    .project-left { display: flex; align-items: baseline; gap: 3rem; flex-wrap: wrap; }
-    .project-num { font-size: 0.75rem; color: var(--dim); min-width: 2rem; }
-    .project-info {}
-    .project-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 400; color: var(--text);
-      letter-spacing: -0.01em;
-      margin-bottom: 0.3rem;
+    .hero-bio { font-size: 0.95rem; color: var(--muted); line-height: 1.75; max-width: 360px; }
+    .hero-bio strong { color: var(--text); font-weight: 500; }
+    .hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn-solid {
+      font-size: 0.85rem; font-weight: 500;
+      background: var(--blue); color: #fff;
+      padding: 0.65rem 1.4rem; border-radius: 5px;
+      transition: opacity 0.2s;
     }
-    .project-sub { font-size: 0.82rem; color: var(--muted); }
-    .project-tags-inline { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
-    .ptag {
-      font-size: 0.7rem; padding: 0.2rem 0.6rem;
-      border: 1px solid var(--border); border-radius: 3px;
-      color: var(--dim);
-    }
-    .project-right { display: flex; align-items: center; gap: 2rem; flex-shrink: 0; }
-    .project-year { font-size: 0.8rem; color: var(--dim); }
-    .project-arrow {
-      font-size: 1.2rem; color: var(--dim);
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    /* ── INFO ── */
-    #info {
-      padding: 6rem 3rem;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: start;
-      border-bottom: 1px solid var(--border);
-    }
-    .info-left h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400; color: var(--text);
-      line-height: 1.2; margin-bottom: 2rem;
-    }
-    .info-left p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
-    .info-left p strong { color: var(--text); font-weight: 500; }
-    .info-right {}
-    .info-block { margin-bottom: 2.5rem; }
-    .info-block-label {
-      font-size: 0.72rem; color: var(--dim);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .info-item { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
-    .info-item-top { display: flex; justify-content: space-between; align-items: baseline; }
-    .info-item-name { font-size: 0.9rem; color: var(--text); }
-    .info-item-year { font-size: 0.78rem; color: var(--dim); }
-    .info-item-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
-
-    /* ── SKILLS ── */
-    #skills {
-      padding: 5rem 3rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .skills-label {
-      font-size: 0.72rem; color: var(--dim);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      margin-bottom: 2rem;
-    }
-    .skills-flow { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .skill-pill {
-      font-size: 0.82rem; color: var(--muted);
+    .btn-solid:hover { opacity: 0.85; color: #fff; }
+    .btn-outline {
+      font-size: 0.85rem; font-weight: 500; color: var(--muted);
       border: 1px solid var(--border);
-      padding: 0.4rem 1rem; border-radius: 999px;
+      padding: 0.65rem 1.4rem; border-radius: 5px;
       transition: border-color 0.2s, color 0.2s;
     }
-    .skill-pill:hover { border-color: var(--blue); color: var(--text); }
+    .btn-outline:hover { border-color: var(--dim); color: var(--text); }
 
-    /* ── CONTACT ── */
-    #contact { padding: 6rem 3rem; }
-    .contact-inner { max-width: 700px; }
-    #contact h2 {
+    /* ── WORK SECTION ── */
+    #work { padding: 0 2.5rem; }
+    .work-head {
+      padding: 4rem 0 3rem;
+      display: flex; align-items: baseline; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .work-head h2 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-size: 1.5rem; font-weight: 400; color: var(--text);
+    }
+    .work-head span { font-size: 0.8rem; color: var(--muted); }
+
+    .project {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; margin-bottom: 0.6rem;
+    }
+    .project-num { font-size: 0.75rem; color: var(--dim); margin-top: 0.3rem; }
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
       font-weight: 400; color: var(--text);
-      line-height: 1.1; letter-spacing: -0.02em;
+      letter-spacing: -0.015em; line-height: 1.1;
+    }
+    .project-arrow {
+      font-size: 1.5rem; color: var(--dim);
+      transition: transform 0.25s, color 0.25s;
+      margin-top: 0.25rem; flex-shrink: 0;
+    }
+    .project:hover .project-arrow { transform: translate(5px, -5px); color: var(--text); }
+    .project-tagline {
+      font-size: 0.9rem; color: var(--muted); margin-bottom: 2.5rem;
+      display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+    }
+    .project-tagline span { color: var(--dim); }
+    .proj-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .ptag {
+      font-size: 0.7rem; padding: 0.2rem 0.6rem;
+      border: 1px solid var(--border); border-radius: 3px; color: var(--dim);
+    }
+
+    /* Code preview block */
+    .code-preview {
+      background: #0c0c0c;
+      border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .project:hover .code-preview { border-color: #333; }
+    .code-bar {
+      background: #161616; padding: 0.75rem 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #febc2e; }
+    .dot.g { background: #28c840; }
+    .code-filename { font-size: 0.72rem; color: var(--dim); margin-left: 0.5rem; font-family: monospace; }
+    .code-body {
+      padding: 1.5rem 1.75rem;
+      font-family: 'Menlo', 'Consolas', monospace;
+      font-size: 0.78rem; line-height: 1.8;
+      overflow-x: auto;
+    }
+    .c-kw  { color: #c792ea; } /* keyword */
+    .c-fn  { color: #82aaff; } /* function */
+    .c-str { color: #c3e88d; } /* string */
+    .c-cm  { color: #546e7a; } /* comment */
+    .c-cl  { color: #ffcb6b; } /* class */
+    .c-nu  { color: #f78c6c; } /* number */
+    .c-at  { color: #89ddff; } /* attr/decorator */
+    .c-tx  { color: #d4d4d4; } /* normal text */
+
+    /* project as link */
+    a.project-link-wrap {
+      display: block; color: inherit;
+      transition: background 0.2s;
+    }
+    a.project-link-wrap:hover { background: rgba(255,255,255,0.015); }
+
+    /* ── INFO SECTION ── */
+    #info { padding: 6rem 2.5rem; border-top: 1px solid var(--border); }
+    .info-label {
+      font-size: 0.72rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 0.6rem;
       margin-bottom: 2.5rem;
     }
-    .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .contact-link-btn {
-      font-size: 0.9rem; font-weight: 500;
-      padding: 0.75rem 1.75rem; border-radius: 4px;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    .info-label::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--dim); display: block;
     }
-    .contact-link-btn.primary { background: var(--blue); color: #fff; }
-    .contact-link-btn.primary:hover { background: var(--blue-h); }
-    .contact-link-btn.ghost { border: 1px solid var(--border); color: var(--muted); }
-    .contact-link-btn.ghost:hover { border-color: var(--dim); color: var(--text); }
+    .info-h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      line-height: 1.15; letter-spacing: -0.02em;
+      font-weight: 400; color: var(--text);
+      max-width: 20ch; margin-bottom: 4rem;
+    }
+    .info-h2 em { font-style: italic; color: var(--muted); }
+    .info-story {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; margin-bottom: 5rem;
+    }
+    .info-story p { font-size: 0.95rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.25rem; }
+    .info-story p strong { color: var(--text); font-weight: 500; }
+
+    /* Experience */
+    .exp-label {
+      font-size: 0.72rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 3rem; padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .exp-label::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--dim); display: block;
+    }
+    .exp-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-company {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400; color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .exp-right {}
+    .exp-role { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
+    .exp-date { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+    .exp-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+    /* Skills */
+    .skills-section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+    .skills-label {
+      font-size: 0.72rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 0.6rem; margin-bottom: 2rem;
+    }
+    .skills-label::before { content:''; width:7px;height:7px;border-radius:50%;background:var(--dim);display:block; }
+    .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-chip {
+      font-size: 0.8rem; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.35rem 0.85rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-chip:hover { border-color: var(--blue); color: var(--text); }
 
     /* ── FOOTER ── */
     footer {
-      padding: 2rem 3rem;
+      padding: 4rem 2.5rem 3rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-col h4 {
+      font-size: 0.7rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+    .footer-col a {
+      display: flex; align-items: center; gap: 0.35rem;
+      font-size: 1rem; font-weight: 400; color: var(--muted);
+      padding: 0.4rem 0;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom {
+      padding: 2rem 2.5rem;
       border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: space-between;
       flex-wrap: wrap; gap: 1rem;
     }
-    footer p { font-size: 0.78rem; color: var(--dim); }
-    footer a { font-size: 0.78rem; color: var(--dim); transition: color 0.2s; }
-    footer a:hover { color: var(--muted); }
+    .footer-bottom p { font-size: 0.78rem; color: var(--dim); }
 
-    /* ── FADE IN ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 1.25rem 1.5rem; }
-      #hero { padding: 0 1.5rem 4rem; }
-      #work, #skills, #contact { padding: 4rem 1.5rem; }
-      #info { padding: 4rem 1.5rem; grid-template-columns: 1fr; gap: 3rem; }
-      .project-row { padding: 1.5rem 0; }
-      .project-left { gap: 1.5rem; }
-      footer { padding: 1.5rem; }
+      nav { grid-template-columns: 1fr 1fr; padding: 1rem 1.25rem; }
+      .nav-pill { display: none; }
+      #hero, #work, #info { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .info-story, .exp-row { grid-template-columns: 1fr; gap: 2rem; }
+      footer { grid-template-columns: 1fr 1fr; padding: 3rem 1.25rem; }
+      .footer-bottom { padding: 1.5rem 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <span class="nav-left">Amandah Dandure</span>
-    <div class="nav-right">
-      <a href="#work">Work</a>
-      <a href="#info">About</a>
-      <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank">LinkedIn</a>
-      <a href="mailto:amandadandure2@gmail.com" class="nav-cta">Hire me</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-id">
+    <span class="nav-name">Amandah Dandure</span>
+    <span class="nav-role">Software Developer</span>
+  </div>
+  <div class="nav-pill">
+    <a href="#work" class="active">Work</a>
+    <a href="#info">Info</a>
+  </div>
+  <div class="nav-links">
+    <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank">LinkedIn ↗</a>
+    <a href="mailto:amandadandure2@gmail.com" class="hire">Hire me</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-label">
+    <span class="hero-dot"></span>
+    Open to new opportunities · Midrand, South Africa
+  </div>
+  <h1 class="hero-h1">
+    I build backends,<br>
+    <em>AI tools</em> &amp;<br>
+    mobile apps.
+  </h1>
+  <div class="hero-foot">
+    <p class="hero-bio">
+      <strong>Software Developer</strong> at ManTech Systems &amp; Solutions.<br>
+      Building production systems with Python, Django,<br>
+      Odoo 18, Flutter, and AI APIs. Based in Gauteng.
+    </p>
+    <div class="hero-ctas">
+      <a href="#work" class="btn-solid">View work</a>
+      <a href="https://github.com/amanda-dandure" target="_blank" class="btn-outline">GitHub ↗</a>
     </div>
-  </nav>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section id="hero">
-    <p class="hero-label">Open to new opportunities · Midrand, South Africa</p>
-    <h1 class="hero-headline">
-      I build backends, <em>AI tools</em> &amp; mobile apps.
-    </h1>
-    <div class="hero-meta">
-      <p class="hero-desc">
-        <strong>Software Developer</strong> at ManTech Systems &amp; Solutions.<br>
-        Building production systems with Python, Django, Odoo 18, Flutter, and AI APIs.
-        Based in Gauteng — open to remote, hybrid, or on-site roles.
-      </p>
-      <span class="hero-scroll">
-        Scroll to explore
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </span>
+<!-- WORK -->
+<section id="work">
+  <div class="work-head reveal">
+    <h2>Selected work</h2>
+    <span>Open-source · 2025–2026</span>
+  </div>
+
+  <!-- 01 -->
+  <a href="https://github.com/amanda-dandure/jobboard-api" target="_blank" class="project-link-wrap">
+    <div class="project reveal">
+      <div class="project-header">
+        <div>
+          <p class="project-num">01 ——</p>
+          <h3 class="project-title">jobboard-api</h3>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-tagline">
+        <span>Django 5 · REST API · 2025</span>
+        <span>—</span>
+        <span>RESTful job board with JWT auth, Celery tasks &amp; Docker</span>
+        <div class="proj-tags">
+          <span class="ptag">Django 5</span><span class="ptag">DRF</span><span class="ptag">PostgreSQL</span><span class="ptag">Celery</span><span class="ptag">Docker</span>
+        </div>
+      </div>
+      <div class="code-preview">
+        <div class="code-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="code-filename">jobs/views.py</span>
+        </div>
+        <div class="code-body">
+<span class="c-at">@action</span><span class="c-tx">(detail=</span><span class="c-kw">False</span><span class="c-tx">, methods=[</span><span class="c-str">'post'</span><span class="c-tx">], permission_classes=[</span><span class="c-cl">IsEmployer</span><span class="c-tx">])</span><br>
+<span class="c-kw">def</span> <span class="c-fn">post_job</span><span class="c-tx">(self, request):</span><br>
+<span class="c-tx">    serializer = </span><span class="c-cl">JobSerializer</span><span class="c-tx">(data=request.data)</span><br>
+<span class="c-tx">    serializer.is_valid(raise_exception=</span><span class="c-kw">True</span><span class="c-tx">)</span><br>
+<span class="c-tx">    job = serializer.save(employer=request.user.employer_profile)</span><br>
+<span class="c-tx">    send_job_notification.</span><span class="c-fn">delay</span><span class="c-tx">(job.id)  </span><span class="c-cm"># Celery async task</span><br>
+<span class="c-kw">    return</span> <span class="c-cl">Response</span><span class="c-tx">(serializer.data, status=</span><span class="c-nu">201</span><span class="c-tx">)</span>
+        </div>
+      </div>
     </div>
-  </section>
+  </a>
 
-  <!-- WORK -->
-  <section id="work">
-    <div class="work-header reveal">
-      <h2>Selected work</h2>
-      <span>Open-source · 2025–2026</span>
+  <!-- 02 -->
+  <a href="https://github.com/amanda-dandure/jobflow-ai" target="_blank" class="project-link-wrap">
+    <div class="project reveal">
+      <div class="project-header">
+        <div>
+          <p class="project-num">02 ——</p>
+          <h3 class="project-title">jobflow-ai</h3>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-tagline">
+        <span>Django · Claude API · 2025</span>
+        <span>—</span>
+        <span>AI job tracker with Kanban &amp; one-click cover letters</span>
+        <div class="proj-tags">
+          <span class="ptag">Django</span><span class="ptag">Claude API</span><span class="ptag">HTMX</span><span class="ptag">Tailwind</span>
+        </div>
+      </div>
+      <div class="code-preview">
+        <div class="code-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="code-filename">apps/jobs/ai.py</span>
+        </div>
+        <div class="code-body">
+<span class="c-tx">response = client.messages.create(</span><br>
+<span class="c-tx">    model=</span><span class="c-str">"claude-sonnet-4-6"</span><span class="c-tx">,</span><br>
+<span class="c-tx">    system=[{</span><span class="c-str">"type"</span><span class="c-tx">: </span><span class="c-str">"text"</span><span class="c-tx">, </span><span class="c-str">"text"</span><span class="c-tx">: SYSTEM_PROMPT,</span><br>
+<span class="c-tx">             </span><span class="c-str">"cache_control"</span><span class="c-tx">: {</span><span class="c-str">"type"</span><span class="c-tx">: </span><span class="c-str">"ephemeral"</span><span class="c-tx">}}],  </span><span class="c-cm"># prompt cache</span><br>
+<span class="c-tx">    messages=[{</span><span class="c-str">"role"</span><span class="c-tx">: </span><span class="c-str">"user"</span><span class="c-tx">, </span><span class="c-str">"content"</span><span class="c-tx">: prompt}],</span><br>
+<span class="c-tx">    max_tokens=</span><span class="c-nu">1024</span><span class="c-tx">,</span><br>
+<span class="c-tx">)</span><br>
+<span class="c-kw">return</span> <span class="c-tx">response.content[</span><span class="c-nu">0</span><span class="c-tx">].text</span>
+        </div>
+      </div>
     </div>
+  </a>
 
-    <div class="work-grid">
-
-      <a href="https://github.com/amanda-dandure/jobboard-api" target="_blank" class="project-row reveal">
-        <div class="project-left">
-          <span class="project-num">01</span>
-          <div class="project-info">
-            <p class="project-title">jobboard-api</p>
-            <p class="project-sub">RESTful job board with JWT auth, Celery tasks, pytest suite &amp; Docker Compose</p>
-            <div class="project-tags-inline">
-              <span class="ptag">Django 5</span><span class="ptag">DRF</span><span class="ptag">PostgreSQL</span><span class="ptag">Celery</span><span class="ptag">Docker</span>
-            </div>
-          </div>
+  <!-- 03 -->
+  <a href="https://github.com/amanda-dandure/odoo-helpdesk-lite" target="_blank" class="project-link-wrap">
+    <div class="project reveal">
+      <div class="project-header">
+        <div>
+          <p class="project-num">03 ——</p>
+          <h3 class="project-title">odoo-helpdesk-lite</h3>
         </div>
-        <div class="project-right">
-          <span class="project-year">2025</span>
-          <span class="project-arrow">↗</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-tagline">
+        <span>Odoo 18 · Python · 2025</span>
+        <span>—</span>
+        <span>Installable helpdesk module with Kanban, SLA &amp; chatter</span>
+        <div class="proj-tags">
+          <span class="ptag">Odoo 18</span><span class="ptag">Python</span><span class="ptag">XML</span><span class="ptag">PostgreSQL</span>
         </div>
-      </a>
-
-      <a href="https://github.com/amanda-dandure/jobflow-ai" target="_blank" class="project-row reveal">
-        <div class="project-left">
-          <span class="project-num">02</span>
-          <div class="project-info">
-            <p class="project-title">jobflow-ai</p>
-            <p class="project-sub">AI job tracker with Kanban board &amp; one-click cover letters via Claude API</p>
-            <div class="project-tags-inline">
-              <span class="ptag">Django</span><span class="ptag">Claude API</span><span class="ptag">HTMX</span><span class="ptag">Tailwind</span><span class="ptag">Alpine.js</span>
-            </div>
-          </div>
+      </div>
+      <div class="code-preview">
+        <div class="code-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="code-filename">models/helpdesk_ticket.py</span>
         </div>
-        <div class="project-right">
-          <span class="project-year">2025</span>
-          <span class="project-arrow">↗</span>
+        <div class="code-body">
+<span class="c-kw">class</span> <span class="c-cl">HelpdeskTicket</span><span class="c-tx">(models.</span><span class="c-cl">Model</span><span class="c-tx">):</span><br>
+<span class="c-tx">    _name = </span><span class="c-str">'helpdesk.ticket'</span><br>
+<span class="c-tx">    _inherit = [</span><span class="c-str">'mail.thread'</span><span class="c-tx">, </span><span class="c-str">'mail.activity.mixin'</span><span class="c-tx">]</span><br><br>
+<span class="c-tx">    is_overdue = fields.</span><span class="c-cl">Boolean</span><span class="c-tx">(</span><br>
+<span class="c-tx">        compute=</span><span class="c-str">'_compute_is_overdue'</span><span class="c-tx">, store=</span><span class="c-kw">True</span><span class="c-tx">,</span><br>
+<span class="c-tx">    )</span><br><br>
+<span class="c-at">    @api.depends</span><span class="c-tx">(</span><span class="c-str">'deadline'</span><span class="c-tx">, </span><span class="c-str">'stage_id.is_closed'</span><span class="c-tx">)</span><br>
+<span class="c-kw">    def</span> <span class="c-fn">_compute_is_overdue</span><span class="c-tx">(self):</span><br>
+<span class="c-kw">        for</span> <span class="c-tx">rec </span><span class="c-kw">in</span> <span class="c-tx">self:</span><br>
+<span class="c-tx">            rec.is_overdue = rec.deadline </span><span class="c-kw">and</span> <span class="c-tx">fields.</span><span class="c-cl">Date</span><span class="c-tx">.today() > rec.deadline</span>
         </div>
-      </a>
-
-      <a href="https://github.com/amanda-dandure/odoo-helpdesk-lite" target="_blank" class="project-row reveal">
-        <div class="project-left">
-          <span class="project-num">03</span>
-          <div class="project-info">
-            <p class="project-title">odoo-helpdesk-lite</p>
-            <p class="project-sub">Installable Odoo 18 module — Kanban workflow, SLA tracking, close wizard &amp; chatter</p>
-            <div class="project-tags-inline">
-              <span class="ptag">Odoo 18</span><span class="ptag">Python</span><span class="ptag">XML</span><span class="ptag">PostgreSQL</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-right">
-          <span class="project-year">2025</span>
-          <span class="project-arrow">↗</span>
-        </div>
-      </a>
-
-      <a href="https://github.com/amanda-dandure/doc-qa" target="_blank" class="project-row reveal">
-        <div class="project-left">
-          <span class="project-num">04</span>
-          <div class="project-info">
-            <p class="project-title">doc-qa</p>
-            <p class="project-sub">Semantic document Q&amp;A — RAG pipeline with ChromaDB, sentence-transformers &amp; Claude API</p>
-            <div class="project-tags-inline">
-              <span class="ptag">FastAPI</span><span class="ptag">ChromaDB</span><span class="ptag">Claude API</span><span class="ptag">RAG</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-right">
-          <span class="project-year">2025</span>
-          <span class="project-arrow">↗</span>
-        </div>
-      </a>
-
-      <a href="https://github.com/amanda-dandure/warehouse-scanner" target="_blank" class="project-row reveal">
-        <div class="project-left">
-          <span class="project-num">05</span>
-          <div class="project-info">
-            <p class="project-title">warehouse-scanner</p>
-            <p class="project-sub">Offline-first Flutter app — live barcode scanning, SQLite storage &amp; REST sync</p>
-            <div class="project-tags-inline">
-              <span class="ptag">Flutter</span><span class="ptag">Dart</span><span class="ptag">SQLite</span><span class="ptag">Dio</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-right">
-          <span class="project-year">2026</span>
-          <span class="project-arrow">↗</span>
-        </div>
-      </a>
-
+      </div>
     </div>
-  </section>
+  </a>
 
-  <!-- INFO -->
-  <section id="info">
-    <div class="info-left reveal">
-      <h2>Building real systems,<br>not just demos.</h2>
+  <!-- 04 -->
+  <a href="https://github.com/amanda-dandure/doc-qa" target="_blank" class="project-link-wrap">
+    <div class="project reveal">
+      <div class="project-header">
+        <div>
+          <p class="project-num">04 ——</p>
+          <h3 class="project-title">doc-qa</h3>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-tagline">
+        <span>FastAPI · RAG · 2025</span>
+        <span>—</span>
+        <span>Semantic document Q&amp;A with ChromaDB &amp; Claude API</span>
+        <div class="proj-tags">
+          <span class="ptag">FastAPI</span><span class="ptag">ChromaDB</span><span class="ptag">Claude API</span><span class="ptag">RAG</span>
+        </div>
+      </div>
+      <div class="code-preview">
+        <div class="code-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="code-filename">services/qa.py</span>
+        </div>
+        <div class="code-body">
+<span class="c-kw">async def</span> <span class="c-fn">answer</span><span class="c-tx">(query: str) -> </span><span class="c-cl">QueryResponse</span><span class="c-tx">:</span><br>
+<span class="c-tx">    chunks = embedder.</span><span class="c-fn">query</span><span class="c-tx">(query, n_results=</span><span class="c-nu">4</span><span class="c-tx">)</span><br>
+<span class="c-tx">    context = </span><span class="c-str">"\n\n"</span><span class="c-tx">.</span><span class="c-fn">join</span><span class="c-tx">(chunks)</span><br><br>
+<span class="c-tx">    response = client.messages.create(</span><br>
+<span class="c-tx">        model=</span><span class="c-str">"claude-haiku-4-5"</span><span class="c-tx">,</span><br>
+<span class="c-tx">        system=[{</span><span class="c-str">"type"</span><span class="c-tx">:</span><span class="c-str">"text"</span><span class="c-tx">,</span><span class="c-str">"text"</span><span class="c-tx">:SYSTEM,</span><br>
+<span class="c-tx">                 </span><span class="c-str">"cache_control"</span><span class="c-tx">:{</span><span class="c-str">"type"</span><span class="c-tx">:</span><span class="c-str">"ephemeral"</span><span class="c-tx">}}],</span><br>
+<span class="c-tx">        messages=[{</span><span class="c-str">"role"</span><span class="c-tx">:</span><span class="c-str">"user"</span><span class="c-tx">,</span><span class="c-str">"content"</span><span class="c-tx">:f</span><span class="c-str">"{context}\n\nQ: {query}"</span><span class="c-tx">}],</span><br>
+<span class="c-tx">    )</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 05 -->
+  <a href="https://github.com/amanda-dandure/warehouse-scanner" target="_blank" class="project-link-wrap">
+    <div class="project reveal">
+      <div class="project-header">
+        <div>
+          <p class="project-num">05 ——</p>
+          <h3 class="project-title">warehouse-scanner</h3>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-tagline">
+        <span>Flutter · SQLite · 2026</span>
+        <span>—</span>
+        <span>Offline-first warehouse app with barcode scanning &amp; sync</span>
+        <div class="proj-tags">
+          <span class="ptag">Flutter</span><span class="ptag">Dart</span><span class="ptag">SQLite</span><span class="ptag">Dio</span>
+        </div>
+      </div>
+      <div class="code-preview">
+        <div class="code-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="code-filename">services/sync_service.dart</span>
+        </div>
+        <div class="code-body">
+<span class="c-kw">Future</span><span class="c-tx">&lt;</span><span class="c-kw">void</span><span class="c-tx">&gt; </span><span class="c-fn">syncPendingItems</span><span class="c-tx">() </span><span class="c-kw">async</span><span class="c-tx"> {</span><br>
+<span class="c-tx">  </span><span class="c-kw">final</span><span class="c-tx"> result = </span><span class="c-kw">await</span><span class="c-tx"> </span><span class="c-cl">Connectivity</span><span class="c-tx">().checkConnectivity();</span><br>
+<span class="c-kw">  if</span><span class="c-tx"> (result == </span><span class="c-cl">ConnectivityResult</span><span class="c-tx">.none) </span><span class="c-kw">return</span><span class="c-tx">;</span><br><br>
+<span class="c-kw">  final</span><span class="c-tx"> items = </span><span class="c-kw">await</span><span class="c-tx"> db.</span><span class="c-fn">getUnsynced</span><span class="c-tx">();</span><br>
+<span class="c-kw">  if</span><span class="c-tx"> (items.isEmpty) </span><span class="c-kw">return</span><span class="c-tx">;</span><br><br>
+<span class="c-kw">  final</span><span class="c-tx"> ok = </span><span class="c-kw">await</span><span class="c-tx"> api.</span><span class="c-fn">syncItems</span><span class="c-tx">(items);</span><br>
+<span class="c-kw">  if</span><span class="c-tx"> (ok) </span><span class="c-kw">await</span><span class="c-tx"> db.</span><span class="c-fn">markSynced</span><span class="c-tx">(items.map((i) => i.id).toList());</span><br>
+<span class="c-tx">}</span>
+        </div>
+      </div>
+    </div>
+  </a>
+</section>
+
+<!-- INFO -->
+<section id="info">
+  <div class="info-label">About me</div>
+  <h2 class="info-h2 reveal">
+    I'm passionate about building systems that <em>actually matter.</em>
+  </h2>
+
+  <div class="info-story reveal">
+    <div>
       <p>
-        I'm a <strong>Software Developer</strong> based in Midrand, South Africa,
-        with a BSc in IT and 1+ year of production experience at ManTech Systems &amp; Solutions.
+        I'm <strong>Amandah Dandure</strong>, a Software Developer based in Midrand, South Africa.
+        With a BSc in IT and 1+ year of production experience at ManTech Systems &amp; Solutions,
+        I've moved from writing scripts to shipping full production platforms.
       </p>
       <p>
-        My work spans Odoo 18 ERP customisation, Python/Django REST APIs,
-        Flutter offline-first mobile apps, and AI-integrated tools using the Claude and OpenAI APIs.
-        I've shipped cryptographic document-signing systems, MES platforms, and RAG-powered search tools — all in production.
+        What excites me is the intersection of <strong>backend reliability, mobile experience, and AI</strong> —
+        building things that are fast, offline-capable, and smart enough to reduce real work for real people.
+      </p>
+    </div>
+    <div>
+      <p>
+        At ManTech I've built 5,400+ lines of Odoo 18 custom modules covering MES workflows,
+        QC inspections, real-time OEE dashboards, and cryptographic document signing systems.
       </p>
       <p>
-        The five projects above are open-source replicas of that work —
-        fully functional and built to the same standard.
+        Outside of work, I built five open-source projects — each one a public replica of a
+        production system — to show what I can do with full creative control.
       </p>
     </div>
-    <div class="info-right reveal">
-      <div class="info-block">
-        <p class="info-block-label">Experience</p>
-        <div class="info-item">
-          <div class="info-item-top">
-            <span class="info-item-name">Software Developer</span>
-            <span class="info-item-year">2025 – Present</span>
-          </div>
-          <p class="info-item-sub">ManTech Systems &amp; Solutions · Woodmead</p>
-        </div>
-        <div class="info-item">
-          <div class="info-item-top">
-            <span class="info-item-name">Coding Facilitator</span>
-            <span class="info-item-year">2024</span>
-          </div>
-          <p class="info-item-sub">The Tomorrow Trust · Johannesburg</p>
-        </div>
-      </div>
-      <div class="info-block">
-        <p class="info-block-label">Education</p>
-        <div class="info-item">
-          <div class="info-item-top">
-            <span class="info-item-name">ALX Software Engineering</span>
-            <span class="info-item-year">2023</span>
-          </div>
-          <p class="info-item-sub">Front-end Specialisation · 12-month programme</p>
-        </div>
-        <div class="info-item">
-          <div class="info-item-top">
-            <span class="info-item-name">BSc Information Technology</span>
-            <span class="info-item-year">2021</span>
-          </div>
-          <p class="info-item-sub">Systems Development · Richfield Graduate Institute</p>
-        </div>
-      </div>
-      <div class="info-block">
-        <p class="info-block-label">Availability</p>
-        <div class="info-item">
-          <div class="info-item-top">
-            <span class="info-item-name">Open to opportunities</span>
-          </div>
-          <p class="info-item-sub">Remote · Hybrid · On-site in Gauteng</p>
-        </div>
-      </div>
+  </div>
+
+  <div class="exp-label">Experience</div>
+
+  <div class="exp-row reveal">
+    <div class="exp-company">ManTech</div>
+    <div class="exp-right">
+      <p class="exp-role">Software Developer</p>
+      <p class="exp-date">01/25 – Present</p>
+      <p class="exp-desc">
+        Building Odoo 18 custom modules, Flutter mobile apps with offline-first architecture,
+        cryptographic document-signing systems, and AI integrations using Claude and OpenAI APIs.
+        Delivered full systems including a Manufacturing Execution System and an Enterprise Document
+        Tracking platform.
+      </p>
     </div>
-  </section>
+  </div>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <p class="skills-label reveal">Tech stack</p>
-    <div class="skills-flow reveal">
-      <span class="skill-pill">Python</span>
-      <span class="skill-pill">Django 4/5</span>
-      <span class="skill-pill">Django REST Framework</span>
-      <span class="skill-pill">FastAPI</span>
-      <span class="skill-pill">Odoo 18</span>
-      <span class="skill-pill">Flutter</span>
-      <span class="skill-pill">Dart</span>
-      <span class="skill-pill">JavaScript</span>
-      <span class="skill-pill">PostgreSQL</span>
-      <span class="skill-pill">MySQL</span>
-      <span class="skill-pill">SQLite</span>
-      <span class="skill-pill">Redis</span>
-      <span class="skill-pill">Celery</span>
-      <span class="skill-pill">Docker</span>
-      <span class="skill-pill">Nginx</span>
-      <span class="skill-pill">Linux</span>
-      <span class="skill-pill">Git</span>
-      <span class="skill-pill">Claude API</span>
-      <span class="skill-pill">OpenAI API</span>
-      <span class="skill-pill">RAG</span>
-      <span class="skill-pill">ChromaDB</span>
-      <span class="skill-pill">SYSPRO ERP</span>
-      <span class="skill-pill">ThingsBoard IoT</span>
-      <span class="skill-pill">Twilio</span>
-      <span class="skill-pill">HTMX</span>
-      <span class="skill-pill">Tailwind CSS</span>
+  <div class="exp-row reveal">
+    <div class="exp-company">Tomorrow Trust</div>
+    <div class="exp-right">
+      <p class="exp-role">Coding Facilitator</p>
+      <p class="exp-date">02/24 – 11/24</p>
+      <p class="exp-desc">
+        Taught JavaScript, CSS, and HTML to 20+ students per class. Improved project completion
+        rates by 20% through structured mentorship. Mentored five students who competed in
+        a provincial coding competition.
+      </p>
     </div>
-  </section>
+  </div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner reveal">
-      <h2>Let's build something together.</h2>
-      <div class="contact-links">
-        <a href="mailto:amandadandure2@gmail.com" class="contact-link-btn primary">amandadandure2@gmail.com</a>
-        <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank" class="contact-link-btn ghost">LinkedIn</a>
-        <a href="https://github.com/amanda-dandure" target="_blank" class="contact-link-btn ghost">GitHub</a>
-      </div>
+  <div class="skills-section reveal">
+    <div class="skills-label">Tech stack</div>
+    <div class="skills-wrap">
+      <span class="skill-chip">Python</span>
+      <span class="skill-chip">Django 4/5</span>
+      <span class="skill-chip">Django REST Framework</span>
+      <span class="skill-chip">FastAPI</span>
+      <span class="skill-chip">Odoo 18</span>
+      <span class="skill-chip">Flutter</span>
+      <span class="skill-chip">Dart</span>
+      <span class="skill-chip">JavaScript</span>
+      <span class="skill-chip">PostgreSQL</span>
+      <span class="skill-chip">MySQL</span>
+      <span class="skill-chip">SQLite</span>
+      <span class="skill-chip">Redis</span>
+      <span class="skill-chip">Celery</span>
+      <span class="skill-chip">Docker</span>
+      <span class="skill-chip">Nginx</span>
+      <span class="skill-chip">Linux</span>
+      <span class="skill-chip">Git</span>
+      <span class="skill-chip">Claude API</span>
+      <span class="skill-chip">OpenAI API</span>
+      <span class="skill-chip">RAG / ChromaDB</span>
+      <span class="skill-chip">SYSPRO ERP</span>
+      <span class="skill-chip">ThingsBoard IoT</span>
+      <span class="skill-chip">HTMX</span>
+      <span class="skill-chip">Tailwind CSS</span>
+      <span class="skill-chip">C</span>
+      <span class="skill-chip">XML</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 Amandah Dandure · Midrand, South Africa</p>
-    <a href="https://github.com/amanda-dandure/amanda-dandure.github.io" target="_blank">View source</a>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-col">
+    <h4>Main</h4>
+    <a href="#work">Work</a>
+    <a href="#info">Info</a>
+    <a href="https://github.com/amanda-dandure" target="_blank">GitHub ↗</a>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <a href="https://www.linkedin.com/in/amandah-dandure/" target="_blank">LinkedIn ↗</a>
+    <a href="mailto:amandadandure2@gmail.com">amandadandure2@gmail.com</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 Amandah Dandure. All rights reserved.</p>
+  <p>Built with care and too much coffee.</p>
+</div>
 
-  <script>
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-  </script>
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.07 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Active nav pill
+  const sections = document.querySelectorAll('section');
+  const pillLinks = document.querySelectorAll('.nav-pill a');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        pillLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.nav-pill a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => io.observe(s));
+</script>
 
 </body>
 </html>
